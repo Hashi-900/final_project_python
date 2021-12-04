@@ -1,0 +1,17 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import holoviews as hv
+import plotly.graph_objects as go
+import plotly.express as pex
+
+
+aid_df = pd.read_csv(full_path)
+countries_df =pd.read_csv(full_path_one)
+imf_df =pd.read_csv(full_path_two)
+aid_df['Foreign Aid'] = aid_df['Value']
+aid_df.head(20)
+
+sorted_aid =aid_df.groupby(['Donor'])['Foreign Aid'].agg([np.mean, np.median]).reset_index()
+sorted_aid.sort_values(by=['mean', 'median'], ascending=False).head(20)
